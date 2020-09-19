@@ -1,0 +1,3 @@
+MONGO_URI=mongodb://<host>:<port>/<db_name>
+RMQ_URL=amqp://<user>:<password>@<host>:<port>/
+ENDPOINT_MONGO_QUEUE=<queue_name>

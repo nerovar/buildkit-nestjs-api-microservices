@@ -1,0 +1,5 @@
+SSO_CLIENT_ID=<azure_client_id>
+SSO_TID=<azure_tid>
+SSO_JWKS=<jwks_url>
+RMQ_URL=amqp://<user>:<password>@<host>:<port>/
+SECURITY_QUEUE=<queue_name>

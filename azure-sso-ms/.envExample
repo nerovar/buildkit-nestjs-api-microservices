@@ -1,0 +1,12 @@
+SSO_CLIENT_ID=<azure_client_id>
+SSO_CLIENT_SECRET=<azure_client_secret>
+SSO_GRANT_TYPE=<azure_grant_type>
+SSO_REDIRECT_URI=<azure_redirect_uri>
+SSO_SCOPE=<azure_scope>
+SSO_TOKEN_ENDPOINT=<azure_token_endpoint_url>
+SSO_TID=<azure_tid>
+SSO_JWKS=<jwks_url>
+SSO_GRAPH_URL=<microsoft_graph_url>
+
+RMQ_URL=amqp://<user>:<password>@<host>:<port>/
+AZURE_SSO_QUEUE=<queue_name>

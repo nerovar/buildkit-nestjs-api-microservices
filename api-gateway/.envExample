@@ -1,0 +1,4 @@
+RMQ_URL=amqp://<user>:<password>@<host>:<port>/
+AZURE_SSO_QUEUE=<queue_name>
+SECURITY_QUEUE=<queue_name>
+ENDPOINT_MONGO_QUEUE=<queue_name>
