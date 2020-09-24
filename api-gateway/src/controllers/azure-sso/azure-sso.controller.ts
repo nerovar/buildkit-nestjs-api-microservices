@@ -1,12 +1,13 @@
-import { Controller, Get, Query, Response } from "@nestjs/common";
+import { Controller, Get, Param, Request, Response } from "@nestjs/common";
 import { AzureSsoService } from "./azure-sso.service";
 
-@Controller()
+@Controller('azure')
 export class AzureSsoController {
     constructor(private readonly azureSsoService: AzureSsoService) {}
 
-    @Get('/azure/sso')
-    async azureSso(@Query('code') code, @Response() res) {
-        res.send(await this.azureSsoService.authenticate(code));
+    @Get(':cmd')
+    async azureSso(@Param('cmd') cmd, @Request() req, @Response() res) {
+        const { code, status, error, data } = await this.azureSsoService.azureCommand(cmd, req)
+        res.status(code || 500).send({status, error, data});
     }
 }

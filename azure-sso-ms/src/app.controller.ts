@@ -7,9 +7,8 @@ import { AppService } from './app.service';
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @MessagePattern({ cmd: 'get-mongo-data'})
-  async azureSso(data: any) {
-    const { code } = data;
-    return await this.appService.azureLogin(code);
+  @MessagePattern({ cmd: 'sso'})
+  async azureSso(req: any) {
+    return await this.appService.azureLogin(req);
   }
 }

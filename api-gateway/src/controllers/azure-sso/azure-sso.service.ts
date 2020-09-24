@@ -8,9 +8,7 @@ import { sendCommand } from "src/utility/send-command";
 export class AzureSsoService {
     constructor(@Inject("AZURE_SSO") private readonly azureSso: ClientProxy) {}
 
-    async authenticate(code) {
-        const command = { cmd: 'azure-sso' };
-        const payload = { code };
-        return await sendCommand(this.azureSso, command, payload);
+    async azureCommand(cmd, req) {
+        return await sendCommand(this.azureSso, cmd, req);
     }
 }

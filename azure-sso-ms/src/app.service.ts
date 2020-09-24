@@ -4,15 +4,17 @@ import * as jwt from 'jsonwebtoken';
 
 import { SsoConfig } from './config/sso.config';
 import { getJwksKey, validateToken } from './utility/validate-token.util';
+import { errorHandler } from './utility/error.handler';
 
 
 @Injectable()
 export class AppService {
-  response = {}
+  response = {code: 200, status: 'success', data: null, error: null }
   constructor(private httpService: HttpService) {};
   
-  async azureLogin(code: string) {
+  async azureLogin(req) {
     try {
+      const { code } = req.params;
       const headers = { 'content-type': 'application/x-www-form-urlencoded' };
       const azureData: any = await this.httpService.post(
         process.env.SSO_TOKEN_ENDPOINT,
@@ -28,20 +30,23 @@ export class AppService {
       })
 
       if (!validateToken(idToken)) {
-        this.response['status'] = 'failed';
-        return this.response;
+        return errorHandler(
+          403,
+          'invalid token'
+        )
       }
 
       await this._graphData(azureData.data.access_token);
       this.response['status'] = 'authenticated';
+      this.response['token'] = idToken;
       return this.response;
     } catch (error) {
-      this.response['error'] = 'Please check application logs.';
-      this.response['status'] = 'error';
-      return this.response;
+      return errorHandler(
+        500,
+        'Internal server error'
+      )
     }
   }
-    
 
   private async _graphData(accessToken: string) {
     const headers = {'Authorization': `Bearer ${accessToken}`};

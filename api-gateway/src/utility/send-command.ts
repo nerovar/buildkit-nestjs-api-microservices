@@ -5,12 +5,17 @@ import { timeout, catchError } from 'rxjs/operators';
 
 export const sendCommand = async (
   client: ClientProxy,
-  command: Object,
-  payload: Object,
+  cmd: Object,
+  req: any,
   timeoutMs = 10000,
 ) => {
+  const data = {
+    headers: !Object.keys(req.headers).length ? null : req.headers,
+    params: !Object.keys(req.query).length ? null : req.query,
+    body: !Object.keys(req.body).length ? null : req.body
+  }
   return await client
-    .send<string>(command, payload)
+    .send<any>({ cmd }, data)
     .pipe(
       timeout(timeoutMs),
       catchError(err => {

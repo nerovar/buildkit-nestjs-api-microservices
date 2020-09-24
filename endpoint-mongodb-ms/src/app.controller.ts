@@ -7,7 +7,7 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @MessagePattern({ cmd: 'get-mongo-data' })
-  getMongoData() {
-    return this.appService.getMongoData();
+  async getMongoData(req) {
+    return await this.appService.getMongoData(req);
   }
 }

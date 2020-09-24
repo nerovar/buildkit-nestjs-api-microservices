@@ -8,9 +8,7 @@ import { sendCommand } from "src/utility/send-command";
 export class EndpointMongoService {
     constructor(@Inject("ENDPOINT_MONGO") private readonly endpointMongo: ClientProxy) {}
 
-    async getAll() {
-        const command = { cmd: 'get-mongo-data' };
-        const payload = { };
-        return await sendCommand(this.endpointMongo, command, payload);
+    async endpointMongoCommand(cmd, req) {
+        return await sendCommand(this.endpointMongo, cmd, req);
     }
 }
